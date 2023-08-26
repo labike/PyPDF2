@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1692599964368,
+  "lastUpdate": 1693035257115,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -5778,6 +5778,65 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.059078007257737944",
             "extra": "mean: 32.1515756248 sec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "info@martin-thoma.de",
+            "name": "Martin Thoma",
+            "username": "MartinThoma"
+          },
+          "committer": {
+            "email": "info@martin-thoma.de",
+            "name": "Martin Thoma",
+            "username": "MartinThoma"
+          },
+          "distinct": true,
+          "id": "4c511f98795f348bcdefee8476de24c5960b5649",
+          "message": "REL: 3.15.3\n\n### Bug Fixes (BUG)\n-  Check version of crypt provider (#2115)\n-  TypeError: can't concat str to bytes (#2114)\n-  Require flit_core >= 3.9 (#2091)\n\n[Full Changelog](https://github.com/py-pdf/pypdf/compare/3.15.2...3.15.3)",
+          "timestamp": "2023-08-26T09:22:54+02:00",
+          "tree_id": "f4cb42067a0965a4309e1cd7cfb091a982ae37ad",
+          "url": "https://github.com/labike/PyPDF2/commit/4c511f98795f348bcdefee8476de24c5960b5649"
+        },
+        "date": 1693035256638,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 1.105129483095968,
+            "unit": "iter/sec",
+            "range": "stddev: 0.023574022142922924",
+            "extra": "mean: 904.8713434000035 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 11.22496386164962,
+            "unit": "iter/sec",
+            "range": "stddev: 0.009581268834596332",
+            "extra": "mean: 89.08714650000131 msec\nrounds: 12"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.2151130840148908,
+            "unit": "iter/sec",
+            "range": "stddev: 0.05275075822098495",
+            "extra": "mean: 4.648717694600004 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 10.82458821797002,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0004727877967846216",
+            "extra": "mean: 92.38226709999822 msec\nrounds: 10"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.03691965522478929,
+            "unit": "iter/sec",
+            "range": "stddev: 0.07432796053291214",
+            "extra": "mean: 27.085843405399988 sec\nrounds: 5"
           }
         ]
       }
