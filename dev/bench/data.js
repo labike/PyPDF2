@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1696667018865,
+  "lastUpdate": 1701755439999,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -5896,6 +5896,65 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.10703245264909966",
             "extra": "mean: 32.70372784119998 sec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "phanthanhduypr@gmail.com",
+            "name": "Phan Thanh Duy",
+            "username": "zuypt"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "6cb5343f45a06a85b7c94296afe71e6d6c411727",
+          "message": "Update _base.py (#2325)\n\nSince b\"\" is not mutable it causes python to allocate and deallocate memory repeatedly in the for loop which cause hang/long runtime when handle very large string.\r\n\r\nFor example when using add_js(javascript) to  to add a very big `javascript` bytestring.",
+          "timestamp": "2023-12-04T21:11:12+01:00",
+          "tree_id": "067ef7462094739a232749b75ad7ded71eef44c2",
+          "url": "https://github.com/labike/PyPDF2/commit/6cb5343f45a06a85b7c94296afe71e6d6c411727"
+        },
+        "date": 1701755438986,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.3043541343575895,
+            "unit": "iter/sec",
+            "range": "stddev: 0.024125500972442572",
+            "extra": "mean: 302.63100120000104 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 12.585797258896877,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00785504898127583",
+            "extra": "mean: 79.45464076922913 msec\nrounds: 13"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.2733677721250776,
+            "unit": "iter/sec",
+            "range": "stddev: 0.011974961685323984",
+            "extra": "mean: 3.658075684000002 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.990046988512802,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0003543185239165927",
+            "extra": "mean: 55.58629172222456 msec\nrounds: 18"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.055682871372823316,
+            "unit": "iter/sec",
+            "range": "stddev: 0.06937966241787198",
+            "extra": "mean: 17.958843991799995 sec\nrounds: 5"
           }
         ]
       }
