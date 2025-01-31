@@ -8,10 +8,11 @@ You can read the full docs at https://pypdf.readthedocs.io/.
 """
 
 from ._crypt_providers import crypt_provider
+from ._doc_common import DocumentInformation
 from ._encryption import PasswordType
 from ._merger import PdfMerger
 from ._page import PageObject, Transformation, mult
-from ._reader import DocumentInformation, PdfReader
+from ._reader import PdfReader
 from ._version import __version__
 from ._writer import ObjectDeletionFlag, PdfWriter
 from .constants import ImageType
@@ -26,23 +27,23 @@ except ImportError:
     pil_version = "none"
 
 _debug_versions = (
-    f"pypdf=={__version__}, crypt_provider={crypt_provider}, PIL={pil_version}"
+    f"pypdf=={__version__}, {crypt_provider=}, PIL={pil_version}"
 )
 
 __all__ = [
-    "__version__",
-    "_debug_versions",
+    "DocumentInformation",
     "ImageType",
-    "mult",
+    "ObjectDeletionFlag",
+    "PageObject",
     "PageRange",
     "PaperSize",
-    "DocumentInformation",
-    "ObjectDeletionFlag",
-    "parse_filename_page_ranges",
+    "PasswordType",
     "PdfMerger",
     "PdfReader",
     "PdfWriter",
     "Transformation",
-    "PageObject",
-    "PasswordType",
+    "__version__",
+    "_debug_versions",
+    "mult",
+    "parse_filename_page_ranges",
 ]

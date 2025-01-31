@@ -7,7 +7,7 @@ import pytest
 
 import pypdf.generic
 import pypdf.xmp
-from pypdf import PdfReader
+from pypdf import PdfReader, PdfWriter
 from pypdf.errors import PdfReadError
 
 from . import get_data_from_url
@@ -18,7 +18,7 @@ RESOURCE_ROOT = PROJECT_ROOT / "resources"
 SAMPLE_ROOT = Path(PROJECT_ROOT) / "sample-files"
 
 
-@pytest.mark.samples()
+@pytest.mark.samples
 @pytest.mark.parametrize(
     "src",
     [
@@ -40,6 +40,36 @@ def test_read_xmp_metadata_samples(src):
         "other": "worlds",
         "⏰": "time",
     }
+
+
+@pytest.mark.samples
+def test_writer_xmp_metadata_samples():
+    writer = PdfWriter(SAMPLE_ROOT / "020-xmp/output_with_metadata_pymupdf.pdf")
+    xmp = writer.xmp_metadata
+    assert xmp
+    assert xmp.dc_contributor == []
+    assert xmp.dc_creator == ["John Doe"]
+    assert xmp.dc_source == "Martin Thoma"  # attribute node
+    assert xmp.dc_description == {"x-default": "This is a text"}
+    assert xmp.dc_date == [datetime(1990, 4, 28, 0, 0)]
+    assert xmp.dc_title == {"x-default": "Sample PDF with XMP Metadata"}
+    assert xmp.custom_properties == {
+        "Style": "FooBarStyle",
+        "other": "worlds",
+        "⏰": "time",
+    }
+    co = pypdf.generic.ContentStream(None, None)
+    co.set_data(
+        xmp.stream.get_data().replace(
+            b'dc:source="Martin Thoma"', b'dc:source="Pubpub-Zz"'
+        )
+    )
+    writer.xmp_metadata = pypdf.xmp.XmpInformation(co)
+    b = BytesIO()
+    writer.write(b)
+    reader = PdfReader(b)
+    xmp2 = reader.xmp_metadata
+    assert xmp2.dc_source == "Pubpub-Zz"
 
 
 @pytest.mark.parametrize(
@@ -113,7 +143,7 @@ def test_identity_function(x):
     assert pypdf.xmp._identity(x) == x
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name", "xmpmm_instance_id"),
     [
@@ -133,10 +163,10 @@ def test_xmpmm_instance_id(url, name, xmpmm_instance_id):
     assert xmp_metadata.xmpmm_instance_id == xmpmm_instance_id
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_xmp_dc_description_extraction():
     """XMP dc_description is correctly extracted."""
-    url = "https://corpora.tika.apache.org/base/docs/govdocs1/953/953770.pdf"
+    url = "https://github.com/user-attachments/files/18381721/tika-953770.pdf"
     name = "tika-953770.pdf"
     reader = PdfReader(BytesIO(get_data_from_url(url, name=name)))
     xmp_metadata = reader.xmp_metadata
@@ -149,10 +179,10 @@ def test_xmp_dc_description_extraction():
     }
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_dc_creator_extraction():
     """XMP dc_creator is correctly extracted."""
-    url = "https://corpora.tika.apache.org/base/docs/govdocs1/953/953770.pdf"
+    url = "https://github.com/user-attachments/files/18381721/tika-953770.pdf"
     name = "tika-953770.pdf"
     reader = PdfReader(BytesIO(get_data_from_url(url, name=name)))
     xmp_metadata = reader.xmp_metadata
@@ -161,10 +191,10 @@ def test_dc_creator_extraction():
     assert xmp_metadata.dc_creator == ["U.S. Fish and Wildlife Service"]
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_custom_properties_extraction():
     """XMP custom_properties is correctly extracted."""
-    url = "https://corpora.tika.apache.org/base/docs/govdocs1/986/986065.pdf"
+    url = "https://github.com/user-attachments/files/18381764/tika-986065.pdf"
     name = "tika-986065.pdf"
     reader = PdfReader(BytesIO(get_data_from_url(url, name=name)))
     xmp_metadata = reader.xmp_metadata
@@ -173,10 +203,10 @@ def test_custom_properties_extraction():
     assert xmp_metadata.custom_properties == {"Style": "Searchable Image (Exact)"}
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_dc_subject_extraction():
     """XMP dc_subject is correctly extracted."""
-    url = "https://corpora.tika.apache.org/base/docs/govdocs1/959/959519.pdf"
+    url = "https://github.com/user-attachments/files/18381730/tika-959519.pdf"
     name = "tika-959519.pdf"
     reader = PdfReader(BytesIO(get_data_from_url(url, name=name)))
     xmp_metadata = reader.xmp_metadata
@@ -205,7 +235,7 @@ def test_dc_subject_extraction():
     ]
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_invalid_xmp_information_handling():
     """
     Invalid XML in xmp_metadata is gracefully handled.

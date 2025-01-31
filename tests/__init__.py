@@ -24,6 +24,7 @@ def get_data_from_url(url: Optional[str] = None, name: Optional[str] = None) -> 
 
     Returns:
         Read File as bytes
+
     """
     if name is None:
         raise ValueError("A name must always be specified")
@@ -39,17 +40,17 @@ def get_data_from_url(url: Optional[str] = None, name: Optional[str] = None) -> 
                 return fp.read()
         if not cache_path.exists():
             ssl._create_default_https_context = ssl._create_unverified_context
-            cpt = 3
-            while cpt > 0:
+            attempts = 0
+            while attempts < 3:
                 try:
                     with urllib.request.urlopen(  # noqa: S310
                         url
                     ) as response, cache_path.open("wb") as out_file:
                         out_file.write(response.read())
-                    cpt = 0
+                    break
                 except HTTPError as e:
-                    if cpt > 0:
-                        cpt -= 1
+                    if attempts < 3:
+                        attempts += 1
                     else:
                         raise e
     with open(cache_path, "rb") as fp:
@@ -72,6 +73,7 @@ def _strip_position(line: str) -> str:
 
     Returns:
         A line with stripped position
+
     """
     line = ".py".join(line.split(".py:")[1:])
     line = " ".join(line.split(" ")[1:])
@@ -143,3 +145,25 @@ def test_csv_consistency():
 
     # Ensure the urls are unique
     assert len(pdfs) == len({pdf["url"] for pdf in pdfs})
+
+
+class PILContext:
+    """Allow changing the PIL/Pillow configuration for some limited scope."""
+
+    def __init__(self):
+        self._saved_load_truncated_images = False
+
+    def __enter__(self):
+        # Allow loading incomplete images.
+        from PIL import ImageFile
+        self._saved_load_truncated_images = ImageFile.LOAD_TRUNCATED_IMAGES
+        ImageFile.LOAD_TRUNCATED_IMAGES = True
+        return self
+
+    def __exit__(self, type_, value, traceback):
+        from PIL import ImageFile
+        ImageFile.LOAD_TRUNCATED_IMAGES = self._saved_load_truncated_images
+        if type_:
+            # Error.
+            return
+        return True

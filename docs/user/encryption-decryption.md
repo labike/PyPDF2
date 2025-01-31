@@ -9,8 +9,10 @@ is the latest PDF standard.
 We recommend [`pyca/cryptography`](https://cryptography.io/en/latest/). Alternatively,
 you can use [`pycryptodome`](https://pypi.org/project/pycryptodome/).
 
-> Please see the note in the [installation guide](installation.md)
-> for installing the extra dependencies if interacting with PDFs that use AES.
+```{note}
+Please see the note in the [installation guide](installation.md)
+for installing the extra dependencies if interacting with PDFs that use AES.
+```
 
 ## Encrypt
 
@@ -20,11 +22,7 @@ You can encrypt a PDF by using a password:
 from pypdf import PdfReader, PdfWriter
 
 reader = PdfReader("example.pdf")
-writer = PdfWriter()
-
-# Add all pages to the writer
-for page in reader.pages:
-    writer.add_page(page)
+writer = PdfWriter(clone_from=reader)
 
 # Add a password to the new PDF
 writer.encrypt("my-secret-password", algorithm="AES-256")
@@ -36,8 +34,10 @@ with open("encrypted-pdf.pdf", "wb") as f:
 The algorithm can be one of `RC4-40`, `RC4-128`, `AES-128`, `AES-256-R5`, `AES-256`.
 We recommend using `AES-256-R5`.
 
-> ⚠️ WARNING ⚠️: pypdf uses `RC4` by default for compatibility if you omit the "algorithm" parameter.
-> Since `RC4` is insecure, you should use `AES` algorithms.
+```{warning}
+pypdf uses `RC4` by default for compatibility if you omit the "algorithm" parameter.
+Since `RC4` is insecure, you should use `AES` algorithms.
+```
 
 ## Decrypt
 
@@ -47,14 +47,11 @@ You can decrypt a PDF using the appropriate password:
 from pypdf import PdfReader, PdfWriter
 
 reader = PdfReader("encrypted-pdf.pdf")
-writer = PdfWriter()
 
 if reader.is_encrypted:
     reader.decrypt("my-secret-password")
 
-# Add all pages to the writer
-for page in reader.pages:
-    writer.add_page(page)
+writer = PdfWriter(clone_from=reader)
 
 # Save the new PDF to a file
 with open("decrypted-pdf.pdf", "wb") as f:

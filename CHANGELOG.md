@@ -1,5 +1,264 @@
 # CHANGELOG
 
+## Version 5.2.0, 2025-01-26
+
+### Deprecations (DEP)
+- Deprecate with replacement CCITParameters (#3019)
+- Correct deprecation of interiour_color (#2947)
+
+### New Features (ENH)
+- Support alternative (U)F names for embedded file retrieval (#3072)
+- Adding support for reading .metadata.keywords (#2939)
+
+### Bug Fixes (BUG)
+- Handle further Tf operators in text extraction layout mode (#3073)
+- Ensure `add_metadata` can deal with `_info = None` (#3040)
+- Handle IndirectObject in CCITTFaxDecode filter (#2965)
+- Handle chained colorspace for inline images when no filter is set (#3008)
+- Avoid extracting inline images twice and dropping other operators (#3002)
+- Fixed reference of value with `str.__new__` in TextStringObject (#2952)
+- Handle indirect objects in font width calculations (#2967)
+- Title sometimes is bytes and not str (#2930)
+- Fix undefined variable for text extraction (regression) (#2934)
+- Don't close stream passed to PdfWriter.write() (#2909)
+
+### Robustness (ROB)
+- Handle zero height fonts when extracting text (#3075)
+- Deal with content streams not containing streams (#3005)
+- Gracefully handle some text operators when the operands are missing (#3006)
+- Fall back to non-Adobe Ascii85 format for missing end markers (#3007)
+- Ignore odd-length strings when processing cmap lines (#3009)
+- Skip annotation destination being NullObject in PdfWriter (#2964)
+- Skip destination page being None in PdfWriter (#2963)
+- Fix infinite loop case when reading null objects within an Array
+- Fixing infinite loop in ArrayObject read_from_stream (#2928)
+
+### Documentation (DOC)
+- Add note about default line colors (#3014)
+
+### Developer Experience (DEV)
+- Remove ignoring Ruff rule PGH004 (#3071)
+- Tidy ignore array in tool.ruff.lint (#3069)
+- Move Windows CI to Python 3.13 (#3003)
+- Move to Ubuntu 22.04 (#3004)
+
+### Maintenance (MAINT)
+- Fix formatting of warning message and include exception message (#3076)
+- Narrow return type for `ContentStream.operations` (#2941)
+
+### Testing (TST)
+- Fix image similarity for upcoming Ubuntu 24.04 (#3039)
+- Replace broken Apache Tika Corpora urls (#3041)
+
+### Code Style (STY)
+- Add form feed to WHITESPACES (#3054)
+- Lots of small internal changes
+
+[Full Changelog](https://github.com/py-pdf/pypdf/compare/5.1.0...5.2.0)
+
+## Version 5.1.0, 2024-10-27
+
+### New Features (ENH)
+- Add `layout_mode_font_height_weight` argument to `PageObject.extract_text()` (#2920)
+
+### Bug Fixes (BUG)
+- Fix font specificier for FreeText annotation (#2893)
+- Line breaks are not generated due to incorrect calculation of text leading (#2890)
+- Improve handling of spaces in text extraction (#2882)
+
+### Robustness (ROB)
+- Soft failure for flate encode image mode 1 with wrong LUT size (#2900)
+
+### Documentation (DOC)
+- Use latest package versions (#2907)
+- Correct example of reading FileAttachment annotation (#2906)
+
+### Developer Experience (DEV)
+- Update pinned requirements (#2918)
+- Make make_release.py compatible with Windows environment (#2894)
+
+### Maintenance (MAINT)
+- Remove references to outdated Python versions (#2919)
+- Generalize the method of obtaining space_code (#2891)
+- Unnecessary character mapping process (#2888)
+- New LZW decoding implementation (#2887)
+
+### Testing (TST)
+- Add LzwCodec for encoding (#2883)
+
+### Code Style (STY)
+- Capitalize error messages (#2903)
+- Modify error messages in PdfWriter (#2902)
+
+[Full Changelog](https://github.com/py-pdf/pypdf/compare/5.0.1...5.1.0)
+
+## Version 5.0.1, 2024-09-29
+
+### New Features (ENH)
+- Add `full` parameter to PdfWriter constructor (#2865)
+
+### Bug Fixes (BUG)
+- Update pyproject.toml with minimum Python version of 3.8 (#2859)
+- Cope with unbalanced delimiters in dictionary object (#2878)
+- Cope with encoding with too many differences (#2873)
+- Missing spaces in extract_text() method (#1328) (#2868)
+- Tolerate truncated files and no warning when jumping startxref (#2855)
+
+### Robustness (ROB)
+- Repair PDF with invalid Root object (#2880)
+- Continue parsing dictionary object when error is detected (#2872)
+- Merge documents with invalid pages in named destinations (#2857)
+- Tolerate comments in arrays (#2856)
+
+### Developer Experience (DEV)
+- Use latest Python version for benchmarking (#2879)
+
+### Maintenance (MAINT)
+- Add tests to source distributions (#2874)
+- Refactor _update_field_annotation (#2862)
+
+[Full Changelog](https://github.com/py-pdf/pypdf/compare/5.0.0...5.0.1)
+
+## Version 5.0.0, 2024-09-15
+
+This version drops support for Python 3.7 (not maintained since July 2023), PdfMerger (use PdfWriter instead) and AnnotationBuilder (use annotations instead).
+
+
+### Deprecations (DEP)
+- Remove the deprecated PfdMerger and AnnotationBuilder classes and other deprecations cleanup (#2813)
+- Drop Python 3.7 support (#2793)
+
+### New Features (ENH)
+- Add capability to remove /Info from PDF (#2820)
+- Add incremental capability to PdfWriter (#2811)
+- Add UniGB-UTF16 encodings (#2819)
+- Accept utf strings for metadata (#2802)
+- Report PdfReadError instead of RecursionError (#2800)
+- Compress PDF files merging identical objects (#2795)
+
+### Bug Fixes (BUG)
+- Fix sheared image (#2801)
+
+### Robustness (ROB)
+- Robustify .set_data() (#2821)
+- Raise PdfReadError when missing /Root in trailer (#2808)
+- Fix extract_text() issues on damaged PDFs (#2760)
+- Handle images with empty data when processing an image from bytes (#2786)
+
+### Developer Experience (DEV)
+- Fix coverage uploads (#2832)
+- Test against Python 3.13 (#2776)
+
+
+[Full Changelog](https://github.com/py-pdf/pypdf/compare/4.3.1...5.0.0)
+
+## Version 4.3.1, 2024-07-21
+
+### Bug Fixes (BUG)
+- Cope with Matrix entry in field annotations (#2736)
+
+### Robustness (ROB)
+- Cope with fields with upside down box/rectangle (#2729)
+
+### Maintenance (MAINT)
+- Add deprecate_with_replacement to StreamObject.initializeFromD… (#2728)
+- Deal with cryptography>=43 moving ARC4 (#2765)
+
+[Full Changelog](https://github.com/py-pdf/pypdf/compare/4.3.0...4.3.1)
+
+## Version 4.3.0, 2024-06-23
+
+### New Features (ENH)
+- Accept ETen-B5 and UniCNS-UTF16 encodings (#2721)
+- Add decode_as_image() to ContentStreams (#2615)
+- context manager for PdfReader (#2666)
+- Add capability to set font and size in fields (#2636)
+- Allow to pass input file without named argument (#2576)
+
+### Bug Fixes (BUG)
+- Fix deprecation for Ressources when using old constants (#2705)
+- Fix images issue 4 bits encoding and LUT starting with UTF16_BOM (#2675)
+- Reading large compressed images takes huge time to process (#2644)
+- Highlighted Text Cannot Be Printed (#2604)
+- Fix UnboundLocalError on malformed pdf (#2619)
+
+### Robustness (ROB)
+- Cope with missing Standard 14 fonts in fields (#2677)
+- Improve inline image extraction (#2622)
+- Cope with loops in Fields tree (#2656)
+- Discard /I in choice fields for compatibility with Acrobat (#2614)
+- Cope with some issues in pillow (#2595)
+- Cope with some image extraction issues (#2591)
+
+### Documentation (DOC)
+- Various improvements on docstrings and examples
+
+### Maintenance (MAINT)
+- Deprecate interiour_color with replacement interior_color (#2706)
+- Add deprecate_with_replacement to PdfWriter.find_bookmark (#2674)
+
+### Code Style (STY)
+- Change Link to be a non-markup annotation (#2714)
+
+[Full Changelog](https://github.com/py-pdf/pypdf/compare/4.2.0...4.3.0)
+
+## Version 4.2.0, 2024-04-07
+
+### New Features (ENH)
+- Allow multiple charsets for NameObject.read_from_stream (#2585)
+- Add support for /Kids in page labels (#2562)
+- Allow to update fields on many pages (#2571)
+- Tolerate PDF with invalid xref pointed objects (#2335)
+- Add Enforce from PDF2.0 in viewer_preferences (#2511)
+- Add += and -= operators to ArrayObject (#2510)
+
+### Bug Fixes (BUG)
+- Fix merge_page sometimes generating unknown operator 'QQ' (#2588)
+- Fix fields update where annotations are kids of field (#2570)
+- Process CMYK images without a filter correctly (#2557)
+- Extract text in layout mode without finding resources (#2555)
+- Prevent recursive loop in some PDF files (#2505)
+
+### Robustness (ROB)
+- Tolerate "truncated" xref (#2580)
+- Replace error by warning for EOD in RunLengthDecode/ASCIIHexDecode (#2334)
+- Rebuild xref table if one entry is invalid (#2528)
+- Robustify stream extraction (#2526)
+
+### Documentation (DOC)
+- Update release process for latest changes (#2564)
+- Encryption/decryption: Clone document instead of copying all pages (#2546)
+- Minor improvements (#2542)
+- Update annotation list (#2534)
+- Update references and formatting (#2529)
+- Correct threads reference, plus minor changes (#2521)
+- Minor readability increases (#2515)
+- Simplify PaperSize examples (#2504)
+- Minor improvements (#2501)
+
+### Developer Experience (DEV)
+- Remove unused dependencies (#2572)
+- Remove page labels PR link from message (#2561)
+- Fix changelog generator regarding whitespace and handling of "Other" group (#2492)
+- Add REL to known PR prefixes (#2554)
+- Release using the REL commit instead of git tag (#2500)
+- Unify code between PdfReader and PdfWriter (#2497)
+- Bump softprops/action-gh-release from 1 to 2 (#2514)
+
+### Maintenance (MAINT)
+- Ressources → Resources (and internal name childs) (#2550)
+- Fix typos found by codespell (#2549)
+- Update Read the Docs configuration (#2538)
+- Add root_object, _info and _ID to PdfReader (#2495)
+
+### Testing (TST)
+- Allow loading truncated images if required (#2586)
+- Fix download issues from #2562 (#2578)
+- Improve test_get_contents_from_nullobject to show real use-case (#2524)
+- Add missing test annotations (#2507)
+
+[Full Changelog](https://github.com/py-pdf/pypdf/compare/4.1.0...4.2.0)
+
 ## Version 4.1.0, 2024-03-03
 
 Generating name objects (`NameObject`) without a leading slash
@@ -243,7 +502,7 @@ nobody will be affected though. Hence only the patch update.
 -  Avoid endless recursion of reading damaged PDF file (#2093)
 
 ### Performance Improvements (PI)
--  Re-use content stream (#2101)
+-  Reuse content stream (#2101)
 
 ### Maintenance (MAINT)
 -  Make ParseError inherit from PyPdfError (#2097)
@@ -411,7 +670,7 @@ nobody will be affected though. Hence only the patch update.
 
 ### New Features (ENH)
 -  Simplify metadata input (Document Information Dictionary) (#1851)
--  Extend cmap compatibilty to GBK_EUC_H/V (#1812)
+-  Extend cmap compatibility to GBK_EUC_H/V (#1812)
 
 ### Bug Fixes (BUG)
 -  Prevent infinite loop when no character follows after a comment (#1828)
@@ -432,7 +691,7 @@ nobody will be affected though. Hence only the patch update.
 -  Refactor internal Encryption class (#1821)
 -  Add R parameter to generate_values (#1820)
 -  Make encryption_key parameter of write_to_stream optional (#1819)
--  Prepare for adding AES enryption support (#1818)
+-  Prepare for adding AES encryption support (#1818)
 
 [Full Changelog](https://github.com/py-pdf/pypdf/compare/3.8.1...3.9.0)
 
@@ -665,7 +924,7 @@ NOTICE: pypdf changed the way it represents numbers parsed from PDF files.
 ## Version 3.2.0, 2022-12-31
 
 ### Performance Improvement (PI)
--  Help the specializing adpative interpreter (#1522)
+-  Help the specializing adaptive interpreter (#1522)
 
 ### New Features (ENH)
 -  Add support for page labels (#1519)
@@ -999,12 +1258,12 @@ BUG: Add PyPDF2.generic to PyPI distribution
 
 ### Documentation (DOC)
 -  Update changelog url in package metadata (#1180)
--  Mantion camelot for table extraction (#1179)
+-  Mention camelot for table extraction (#1179)
 -  Mention pyHanko for signing PDF documents (#1178)
 -  Weow have CMAP support since a while (#1177)
 
 ### Maintenance (MAINT)
--  Consistant usage of warnings / log messages (#1164)
+-  Consistent usage of warnings / log messages (#1164)
 -  Consistent terminology for outline items (#1156)
 
 
@@ -1082,7 +1341,7 @@ BUG: Add PyPDF2.generic to PyPI distribution
 
 ### Code Style (STY)
 -  Fixing typos (#1137)
--  Re-use code via get_outlines_property in tests (#1130)
+-  Reuse code via get_outlines_property in tests (#1130)
 
 [Full Changelog](https://github.com/py-pdf/PyPDF2/compare/2.6.0...2.7.0)
 
@@ -1246,7 +1505,7 @@ BUG: Add PyPDF2.generic to PyPI distribution
 
 ## Version 2.3.1, 2022-06-19
 
-BUG: Forgot to add the interal `_codecs` subpackage.
+BUG: Forgot to add the internal `_codecs` subpackage.
 
 [Full Changelog](https://github.com/py-pdf/PyPDF2/compare/2.3.0...2.3.1)
 
@@ -1285,7 +1544,7 @@ The highlight of this release is improved support for file encryption
 -  Fix corrupted (wrongly) linear PDF (#1008)
 
 ### Maintenance (MAINT)
--  Move PDF_Samples folder into ressources
+-  Move PDF_Samples folder into resources
 -  Fix typos (#1007)
 
 ### Testing (TST)

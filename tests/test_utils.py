@@ -11,6 +11,7 @@ from pypdf._utils import (
     _get_max_pdf_version_header,
     _human_readable_bytes,
     check_if_whitespace_only,
+    classproperty,
     deprecate_with_replacement,
     deprecation_no_replacement,
     mark_location,
@@ -42,6 +43,7 @@ RESOURCE_ROOT = PROJECT_ROOT / "resources"
         (io.BytesIO(b"  "), True),
         (io.BytesIO(b"  \n"), True),
         (io.BytesIO(b"    \n"), True),
+        (io.BytesIO(b"\f"), True),
     ],
 )
 def test_skip_over_whitespace(stream, expected):
@@ -59,6 +61,7 @@ def test_skip_over_whitespace(stream, expected):
         (b"  ", True),
         (b"  \n", True),
         (b"    \n", True),
+        (b"\f", True),
     ],
 )
 def test_check_if_whitespace_only(value, expected):
@@ -108,45 +111,11 @@ def test_mark_location():
     Path("pypdf_pdfLocation.txt").unlink()  # cleanup
 
 
-@pytest.mark.parametrize(
-    ("input_str", "expected"),
-    [
-        ("foo", b"foo"),
-        ("😀", "😀".encode()),
-        ("‰", "‰".encode()),
-        ("▷", "▷".encode()),
-        ("世", "世".encode()),
-        # A multi-character string example with non-latin-1 characters:
-        ("😀😃", "😀😃".encode()),
-    ],
-)
-def test_b(input_str: str, expected: str):
-    assert pypdf._utils.b_(input_str) == expected
-
-
 def test_deprecate_no_replacement():
     with pytest.warns(DeprecationWarning) as warn:
         pypdf._utils.deprecate_no_replacement("foo", removed_in="3.0.0")
     error_msg = "foo is deprecated and will be removed in pypdf 3.0.0."
     assert warn[0].message.args[0] == error_msg
-
-
-@pytest.mark.parametrize(
-    ("left", "up", "upleft", "expected"),
-    [
-        (0, 0, 0, 0),
-        (1, 0, 0, 1),
-        (0, 1, 0, 1),
-        (0, 0, 1, 0),
-        (1, 2, 3, 1),
-        (2, 1, 3, 1),
-        (1, 3, 2, 2),
-        (3, 1, 2, 2),
-        (3, 2, 1, 3),
-    ],
-)
-def test_paeth_predictor(left, up, upleft, expected):
-    assert pypdf._utils.paeth_predictor(left, up, upleft) == expected
 
 
 @pytest.mark.parametrize(
@@ -233,7 +202,7 @@ def test_read_previous_line2():
 def test_get_max_pdf_version_header():
     with pytest.raises(ValueError) as exc:
         _get_max_pdf_version_header(b"", b"PDF-1.2")
-    assert exc.value.args[0] == "neither b'' nor b'PDF-1.2' are proper headers"
+    assert exc.value.args[0] == "Neither b'' nor b'PDF-1.2' are proper headers"
 
 
 def test_read_block_backwards_exception():
@@ -324,7 +293,7 @@ def test_human_readable_bytes(input_int, expected_output):
 
 
 def test_file_class():
-    """File class can be instanciated and string representation is ok."""
+    """File class can be instantiated and string representation is ok."""
     f = File(name="image.png", data=b"")
     assert str(f) == "File(name=image.png, data: 0 Byte)"
     assert repr(f) == "File(name=image.png, data: 0 Byte, hash: 0)"
@@ -386,22 +355,22 @@ def test_is_sublist():
         ("1", "1", False),
         ("1.0", "1.1", True),
         ("1", "1.1", True),
-        # suffix left
+        # Suffix left
         ("1a", "2", True),
         ("2a", "1", False),
         ("1a", "1", False),
         ("1.0a", "1.1", True),
-        # I'm not sure about that, but seems special enoguht that it
+        # I'm not sure about that, but seems special enough that it
         # probably doesn't matter:
         ("1a", "1.1", False),
-        # suffix right
+        # Suffix right
         ("1", "2a", True),
         ("2", "1a", False),
         ("1", "1a", True),
         ("1.0", "1.1a", True),
         ("1", "1.1a", True),
         ("", "0.0.0", True),
-        # just suffix matters ... hm, I think this is actually wrong:
+        # Just suffix matters ... hm, I think this is actually wrong:
         ("1.0a", "1.0", False),
         ("1.0", "1.0a", True),
     ],
@@ -412,15 +381,41 @@ def test_version_compare(left, right, is_less_than):
 
 def test_version_compare_equal_str():
     a = Version("1.0")
-    assert (a == "1.0") is False
+    assert a != "1.0"
 
 
 def test_version_compare_lt_str():
     a = Version("1.0")
     with pytest.raises(ValueError) as exc:
-        a < "1.0"  # noqa
+        a < "1.0"  # noqa: B015
     assert exc.value.args[0] == "Version cannot be compared against <class 'str'>"
 
 
 def test_bad_version():
     assert Version("a").components == [(0, "a")]
+
+
+def test_classproperty():
+    class Container:
+        @classproperty
+        def value1(cls) -> int:  # noqa: N805
+            return 42
+
+        @classproperty
+        def value2(cls) -> int:  # noqa: N805
+            return 1337
+
+        @classproperty
+        def value3(cls) -> int:  # noqa: N805
+            return 1
+
+        @value3.getter
+        def value3(cls) -> int:  # noqa: N805
+            return 2
+
+    assert Container.value1 == 42
+    assert Container.value2 == 1337
+    assert Container.value3 == 2
+    assert Container().value1 == 42
+    assert Container().value2 == 1337
+    assert Container().value3 == 2

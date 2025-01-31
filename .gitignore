@@ -12,10 +12,6 @@ __pycache__/
 venv/
 .venv/
 
-#
-.mutmut-cache
-mutmut-results.*
-
 # Code coverage artifacts
 .coverage*
 coverage.xml
@@ -43,3 +39,4 @@ extracted-images/
 
 RELEASE_COMMIT_MSG.md
 RELEASE_TAG_MSG.md
+.envrc
