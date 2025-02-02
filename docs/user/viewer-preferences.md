@@ -1,15 +1,15 @@
 # Adding Viewer Preferences
 
 It is possible to set viewer preferences of a PDF file.
-These properties are described in Section 12.2 of the [PDF 1.7 specification](https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf).
+§12.2 of the [PDF 1.7 specification](https://opensource.adobe.com/dc-acrobat-sdk-docs/pdfstandards/PDF32000_2008.pdf).
 
 Note that the `/ViewerPreferences` dictionary does not exist by default.
-If it's not already present, it must be created by calling the `create_viewer_preferences` method
-of the `PdfWriter` object.
+If it is not already present, it must be created by calling the
+{func}`~pypdf.PdfWriter.create_viewer_preferences` method.
 
-If viewer preferences exist in a PDF file being read with `PdfReader`,
-you can access them as properties of `viewer_preferences`.
-Otherwise, the `viewer_preferences` property will be set to `None`.
+If viewer preferences exist in a PDF file being read with {class}`~pypdf.PdfReader`,
+you can access them as properties of {attr}`~pypdf.PdfReader.viewer_preferences`.
+Otherwise, the {attr}`~pypdf.PdfReader.viewer_preferences` property will be set to `None`.
 
 ## Example
 
@@ -79,5 +79,5 @@ with open("output.pdf", "wb") as output_stream:
 ```
 
 The names beginning with a slash character are part of the PDF file format. They are
-included here to aid to anyone searching pypdf documentation
+included here to ease searching the pypdf documentation
 for these names from the PDF specification.

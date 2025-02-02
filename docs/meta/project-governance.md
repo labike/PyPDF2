@@ -19,7 +19,7 @@ capable of splitting, merging, cropping, and transforming the pages of PDF files
   request, but that is up to the maintainer. Other contributors describe issues,
   help to ask questions on existing issues to make them easier to answer,
   participate in discussions, and help to improve the documentation. Contributors
-  are similar to maintainers, but without technial permissions.
+  are similar to maintainers, but without technical permissions.
 * A **user** is a person who imports pypdf into their code. All pypdf users
   are developers, but not developers who know the internals of pypdf. They only
   use the public interface of pypdf. They will likely have less knowledge about
@@ -90,7 +90,7 @@ The community can expect the following:
   easier for maintainers to see that the contribution will not harm the overall
   project. Their contributions are documented in the git history and in the
   public issues. [Let us know](https://github.com/py-pdf/pypdf/discussions/798)
-  if you would appriciate something else!
+  if you would appreciate something else!
 * Every **community member** uses a respectful language. We are all human, we
   get upset about things we care and other things than what's visible on the
   internet go on in our live. pypdf does not pay its contributors - keep all
@@ -111,7 +111,7 @@ An issue is any technical description that aims at bringing pypdf forward:
 * Performance tickets: pypdf could be faster - let us know about your specific
   scenario.
 
-Any comment that is in those technial descriptions which is not helping the
+Any comment that is in those technical descriptions which is not helping the
 discussion can be deleted. This is especially true for "me too" comments on bugs
 or "bump" comments for desired features. People can express this with 👍 / 👎
 reactions.

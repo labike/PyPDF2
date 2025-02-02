@@ -1,7 +1,7 @@
 # Robustness and strict=False
 
-PDF is [specified in various versions](https://www.pdfa.org/resource/pdf-specification-index/).
-The specification of PDF 1.7 has 978 pages. This length makes it hard to get
+PDF is [specified in various versions](https://pdfa.org/resource/pdf-specification-archive/).
+The specification of PDF 2.0 has 1003 pages. This length makes it hard to get
 everything right. As a consequence, a lot of PDF files are not strictly following the
 specification.
 
@@ -29,8 +29,8 @@ pypdf gives you the option to be strict or not.
 
 pypdf has two core objects:
 
-* [`PdfReader`](../modules/PdfReader.md)
-* [`PdfWriter`](../modules/PdfWriter.md)
+* {class}`~pypdf.PdfReader`
+* {class}`~pypdf.PdfWriter`
 
 Only the PdfReader has a `strict` parameter, since presumably you do not want
 to write a non-conforming PDF.

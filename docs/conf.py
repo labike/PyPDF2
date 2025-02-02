@@ -10,6 +10,7 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
+import datetime
 import os
 import shutil
 import sys
@@ -17,7 +18,7 @@ import sys
 sys.path.insert(0, os.path.abspath("."))
 sys.path.insert(0, os.path.abspath("../"))
 
-import pypdf as py_pkg  # noqa: E402
+import pypdf as py_pkg
 
 shutil.copyfile("../CHANGELOG.md", "meta/CHANGELOG.md")
 shutil.copyfile("../CONTRIBUTORS.md", "meta/CONTRIBUTORS.md")
@@ -25,7 +26,7 @@ shutil.copyfile("../CONTRIBUTORS.md", "meta/CONTRIBUTORS.md")
 # -- Project information -----------------------------------------------------
 
 project = py_pkg.__name__
-copyright = "2006 - 2023, Mathieu Fenniak and pypdf contributors"
+copyright = f"2006 - {datetime.datetime.now(tz=datetime.timezone.utc).year}, Mathieu Fenniak and pypdf contributors"
 author = "Mathieu Fenniak"
 
 # The version info for the project you're documenting, acts as replacement for
@@ -41,7 +42,6 @@ release = py_pkg.__version__
 # If your documentation needs a minimal Sphinx version, state it here.
 needs_sphinx = "4.0.0"
 
-myst_all_links_external = True
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
@@ -66,7 +66,10 @@ intersphinx_mapping = {
 nitpick_ignore_regex = [
     # For reasons unclear at this stage the io module prefixes everything with _io
     # and this confuses sphinx
-    (r"py:class", r"_io.(FileIO|BytesIO|Buffered(Reader|Writer))"),
+    (
+        r"py:class",
+        r"(_io.(FileIO|BytesIO|Buffered(Reader|Writer))|pypdf.*PdfDocCommon)",
+    ),
 ]
 
 autodoc_default_options = {
@@ -87,22 +90,25 @@ templates_path = ["_templates"]
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
+# Configure MyST extension.
+myst_all_links_external = False
+myst_heading_anchors = 3
+
 
 # -- Options for HTML output -------------------------------------------------
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
+# The theme to use for HTML and HTML Help pages. See the documentation for
 # a list of builtin themes.
 #
 html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
-# further.  For a list of options available for each theme, see the
+# further. For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
     "canonical_url": "",
     "analytics_id": "",
     "logo_only": True,
-    "display_version": True,
     "prev_next_buttons_location": "bottom",
     "style_external_links": False,
     # Toc options

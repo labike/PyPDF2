@@ -1,12 +1,8 @@
 coverage
-flake8
-flake8_implicit_str_concat
-flake8-bugbear
-flake8-print
-fpdf2==2.4.1
+fpdf2
 mypy
 pillow
-pycryptodome
+cryptography
 pytest
 pytest-benchmark
 pytest-socket
@@ -15,6 +11,5 @@ pytest-xdist
 pytest-cov
 # ruff  # only take this for 3.11
 typeguard
-types-dataclasses
 types-Pillow
 pyyaml

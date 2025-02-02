@@ -14,7 +14,7 @@ import pytest
 from PIL import Image, ImageChops
 from PIL import __version__ as pil_version
 
-from pypdf import PdfMerger, PdfReader, PdfWriter
+from pypdf import PdfReader, PdfWriter
 from pypdf.constants import PageAttributes as PG
 from pypdf.errors import PdfReadError, PdfReadWarning
 from pypdf.generic import (
@@ -26,7 +26,7 @@ from pypdf.generic import (
     read_object,
 )
 
-from . import get_data_from_url, normalize_warnings
+from . import PILContext, get_data_from_url, normalize_warnings
 
 TESTS_ROOT = Path(__file__).parent.resolve()
 PROJECT_ROOT = TESTS_ROOT.parent
@@ -67,7 +67,7 @@ def test_basic_features(tmp_path):
 
     # add some Javascript to launch the print window on opening this PDF.
     # the password dialog may prevent the print dialog from being shown,
-    # comment the the encription lines, if that's the case, to try this out
+    # comment the encryption lines, if that's the case, to try this out
     writer.add_js("this.print({bUI:true,bSilent:false,bShrinkToFit:true});")
 
     # encrypt your new PDF and add a password
@@ -168,7 +168,6 @@ def test_text_extraction_encrypted():
     assert (
         reader.pages[0]
         .extract_text()
-        .replace("\n", "")
         .strip()
         .startswith("Lorem ipsum dolor sit amet")
     )
@@ -191,8 +190,8 @@ def test_rotate_45():
         assert exc.value.args[0] == "Rotation angle must be a multiple of 90"
 
 
-@pytest.mark.enable_socket()
-@pytest.mark.slow()
+@pytest.mark.enable_socket
+@pytest.mark.slow
 @pytest.mark.parametrize(
     ("enable", "url", "pages"),
     [
@@ -248,12 +247,12 @@ def test_rotate_45():
         (True, "https://github.com/py-pdf/pypdf/files/8884493/998167.pdf", [0]),
         (
             True,
-            "https://corpora.tika.apache.org/base/docs/govdocs1/971/971703.pdf",
+            "https://github.com/user-attachments/files/18382039/971703.pdf",
             [0, 1, 5, 8, 14],
         ),
         (  # faulty PDF, wrongly linearized and with 2 trailer, second with /Root
             True,
-            "https://corpora.tika.apache.org/base/docs/govdocs1/989/989691.pdf",
+            "https://github.com/user-attachments/files/18382034/989691.pdf",
             [0],
         ),
     ],
@@ -273,7 +272,7 @@ def test_extract_textbench(enable, url, pages, print_result=False):
         pass
 
 
-@pytest.mark.slow()
+@pytest.mark.slow
 def test_orientations():
     p = PdfReader(RESOURCE_ROOT / "test Orient.pdf").pages[0]
     p.extract_text("", "")
@@ -308,8 +307,8 @@ def test_orientations():
         ), f"extract_text({req}) => {rst}"
 
 
-@pytest.mark.samples()
-@pytest.mark.enable_socket()
+@pytest.mark.samples
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("base_path", "overlay_path"),
     [
@@ -318,7 +317,7 @@ def test_orientations():
             "sample-files/013-reportlab-overlay/reportlab-overlay.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/935/935981.pdf",
+            "https://github.com/user-attachments/files/18381707/tika-935981.pdf",
             "sample-files/013-reportlab-overlay/reportlab-overlay.pdf",
         ),
     ],
@@ -341,13 +340,13 @@ def test_overlay(pdf_file_path, base_path, overlay_path):
         writer.write(fp)
 
 
-@pytest.mark.enable_socket()
-@pytest.mark.slow()
+@pytest.mark.enable_socket
+@pytest.mark.slow
 @pytest.mark.parametrize(
     ("url", "name"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/924/924546.pdf",
+            "https://github.com/user-attachments/files/18381697/tika-924546.pdf",
             "tika-924546.pdf",
         )
     ],
@@ -356,18 +355,18 @@ def test_overlay(pdf_file_path, base_path, overlay_path):
 def test_merge_with_warning(tmp_path, url, name):
     data = BytesIO(get_data_from_url(url, name=name))
     reader = PdfReader(data)
-    merger = PdfMerger()
+    merger = PdfWriter()
     merger.append(reader)
     # This could actually be a performance bottleneck:
     merger.write(tmp_path / "tmp.merged.pdf")
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/980/980613.pdf",
+            "https://github.com/user-attachments/files/18381757/tika-980613.pdf",
             "tika-980613.pdf",
         )
     ],
@@ -376,26 +375,26 @@ def test_merge_with_warning(tmp_path, url, name):
 def test_merge(tmp_path, url, name):
     data = BytesIO(get_data_from_url(url, name=name))
     reader = PdfReader(data)
-    merger = PdfMerger()
+    merger = PdfWriter()
     merger.append(reader)
     merger.write(tmp_path / "tmp.merged.pdf")
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name", "expected_metadata"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/935/935996.pdf",
+            "https://github.com/user-attachments/files/18381708/tika-935996.pdf",
             "tika-935996.pdf",
             {
                 "/Author": "Unknown",
                 "/CreationDate": "Thursday, May 06, 1999 3:56:54 PM",
-                "/Creator": "C:DEBÆł8",
+                "/Creator": r"C:\DEB\6338",
                 "/Keywords": "",
                 "/Producer": "Acrobat PDFWriter 3.02 for Windows",
                 "/Subject": "",
-                "/Title": "C:DEBÆł8-6R.PDF",
+                "/Title": r"C:\DEB\6338-6R.PDF",
             },
         )
     ],
@@ -407,72 +406,72 @@ def test_get_metadata(url, name, expected_metadata):
     assert expected_metadata == data
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name", "strict", "exception"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/938/938702.pdf",
+            "https://github.com/user-attachments/files/16624503/tika-938702.pdf",
             "tika-938702.pdf",
             False,
             None,  # iss #1090 is now fixed
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/942/942358.pdf",
+            "https://github.com/user-attachments/files/18381715/tika-942358.pdf",
             "tika-942358.pdf",
             False,
             None,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/911/911260.pdf",
+            "https://github.com/user-attachments/files/18381684/tika-911260.pdf",
             "tika-911260.pdf",
             False,
             None,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/992/992472.pdf",
+            "https://github.com/user-attachments/files/18381766/tika-992472.pdf",
             "tika-992472.pdf",
             False,
             None,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/978/978477.pdf",
+            "https://github.com/user-attachments/files/18381756/tika-978477.pdf",
             "tika-978477.pdf",
             False,
             None,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/960/960317.pdf",
+            "https://github.com/user-attachments/files/18381731/tika-960317.pdf",
             "tika-960317.pdf",
             False,
             None,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/930/930513.pdf",
+            "https://github.com/user-attachments/files/18381701/tika-930513.pdf",
             "tika-930513.pdf",
             False,
             None,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/918/918113.pdf",
+            "https://github.com/user-attachments/files/18381691/tika-918113.pdf",
             "tika-918113.pdf",
             True,
             None,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/940/940704.pdf",
+            "https://github.com/user-attachments/files/18381711/tika-940704.pdf",
             "tika-940704.pdf",
             True,
             None,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/976/976488.pdf",
+            "https://github.com/user-attachments/files/18381752/tika-976488.pdf",
             "tika-976488.pdf",
             True,
             None,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/948/948176.pdf",
+            "https://github.com/user-attachments/files/18381716/tika-948176.pdf",
             "tika-948176.pdf",
             True,
             None,
@@ -493,28 +492,28 @@ def test_extract_text(url, name, strict, exception):
         assert ex_info.value.args[0] == exc_text
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/938/938702.pdf",
+            "https://github.com/user-attachments/files/18381710/tika-938702.pdf",
             "tika-938702.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/957/957304.pdf",
+            "https://github.com/user-attachments/files/18381725/tika-957304.pdf",
             "tika-957304.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/915/915194.pdf",
+            "https://github.com/user-attachments/files/18381690/tika-915194.pdf",
             "tika-915194.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/950/950337.pdf",
+            "https://github.com/user-attachments/files/18381717/tika-950337.pdf",
             "tika-950337.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/962/962292.pdf",
+            "https://github.com/user-attachments/files/18381734/tika-962292.pdf",
             "tika-962292.pdf",
         ),
     ],
@@ -529,12 +528,12 @@ def test_compress_raised(url, name):
         page.compress_content_streams()
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/961/961883.pdf",
+            "https://github.com/user-attachments/files/18381733/tika-961883.pdf",
             "tika-961883.pdf",
         ),
     ],
@@ -547,15 +546,19 @@ def test_get_fields_warns(tmp_path, caplog, url, name):
         retrieved_fields = reader.get_fields(fileobj=fp)
 
     assert retrieved_fields == {}
-    assert normalize_warnings(caplog.text) == ["Object 2 0 not defined."]
+    assert normalize_warnings(caplog.text) == [
+        "Ignoring wrong pointing object 1 65536 (offset 0)",
+        "Ignoring wrong pointing object 2 65536 (offset 0)",
+        "Object 2 0 not defined.",
+    ]
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/942/942050.pdf",
+            "https://github.com/user-attachments/files/18381713/tika-942050.pdf",
             "tika-942050.pdf",
         ),
     ],
@@ -570,9 +573,9 @@ def test_get_fields_no_warning(tmp_path, url, name):
     assert len(retrieved_fields) == 10
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_scale_rectangle_indirect_object():
-    url = "https://corpora.tika.apache.org/base/docs/govdocs1/999/999944.pdf"
+    url = "https://github.com/user-attachments/files/18381778/tika-999944.pdf"
     name = "tika-999944.pdf"
     data = BytesIO(get_data_from_url(url, name=name))
     reader = PdfReader(data)
@@ -581,7 +584,6 @@ def test_scale_rectangle_indirect_object():
         page.scale(sx=2, sy=3)
 
 
-@pytest.mark.filterwarnings("ignore::DeprecationWarning")
 def test_merge_output(caplog):
     # Arrange
     base = RESOURCE_ROOT / "Seige_of_Vicksburg_Sample_OCR.pdf"
@@ -589,10 +591,8 @@ def test_merge_output(caplog):
     expected = RESOURCE_ROOT / "Seige_of_Vicksburg_Sample_OCR-crazyones-merged.pdf"
 
     # Act
-    merger = PdfMerger(strict=True)
+    merger = PdfWriter()
     merger.append(base)
-    msg = "Xref table not zero-indexed. ID numbers for objects will be corrected."
-    assert normalize_warnings(caplog.text) == [msg]
     merger.merge(1, crazy)
     stream = BytesIO()
     merger.write(stream)
@@ -612,48 +612,48 @@ def test_merge_output(caplog):
     merger.close()
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/994/994636.pdf",
+            "https://github.com/user-attachments/files/18381767/tika-994636.pdf",
             "tika-994636.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/952/952133.pdf",
+            "https://github.com/user-attachments/files/18381719/tika-952133.pdf",
             "tika-952133.pdf",
         ),
         (  # JPXDecode
-            "https://corpora.tika.apache.org/base/docs/govdocs1/914/914568.pdf",
+            "https://github.com/user-attachments/files/18381688/tika-914568.pdf",
             "tika-914568.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/952/952016.pdf",
+            "https://github.com/user-attachments/files/18381718/tika-952016.pdf",
             "tika-952016.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/965/965118.pdf",
-            "tika-952016.pdf",
+            "https://github.com/user-attachments/files/18382223/965118.pdf",
+            "tika-965118.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/959/959184.pdf",
+            "https://github.com/user-attachments/files/18381729/tika-959184.pdf",
             "tika-959184.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/958/958496.pdf",
+            "https://github.com/user-attachments/files/18381727/tika-958496.pdf",
             "tika-958496.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/972/972174.pdf",
+            "https://github.com/user-attachments/files/18381744/tika-972174.pdf",
             "tika-972174.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/972/972243.pdf",
+            "https://github.com/user-attachments/files/18381745/tika-972243.pdf",
             "tika-972243.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/969/969502.pdf",
+            "https://github.com/user-attachments/files/18381743/tika-969502.pdf",
             "tika-969502.pdf",
         ),
         ("https://arxiv.org/pdf/2201.00214.pdf", "arxiv-2201.00214.pdf"),
@@ -668,12 +668,13 @@ def test_image_extraction(url, name):
     if not root.exists():
         root.mkdir()
 
-    for page in reader.pages:
-        for image in page.images:
-            filename = root / image.name
-            with open(filename, "wb") as img:
-                img.write(image.data)
-            images_extracted.append(filename)
+    with PILContext():
+        for page in reader.pages:
+            for image in page.images:
+                filename = root / image.name
+                with open(filename, "wb") as img:
+                    img.write(image.data)
+                images_extracted.append(filename)
 
     # Cleanup
     do_cleanup = True  # set this to False for manual inspection
@@ -683,10 +684,10 @@ def test_image_extraction(url, name):
                 Path(filepath).unlink()
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_image_extraction_strict():
     # Emits log messages
-    url = "https://corpora.tika.apache.org/base/docs/govdocs1/914/914102.pdf"
+    url = "https://github.com/user-attachments/files/18381687/tika-914102.pdf"
     name = "tika-914102.pdf"
     data = BytesIO(get_data_from_url(url, name=name))
     reader = PdfReader(data, strict=True)
@@ -711,12 +712,12 @@ def test_image_extraction_strict():
                 Path(filepath).unlink()
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/977/977609.pdf",
+            "https://github.com/user-attachments/files/18381754/tika-977609.pdf",
             "tika-977609.pdf",
         ),
     ],
@@ -745,12 +746,12 @@ def test_image_extraction2(url, name):
                 Path(filepath).unlink()
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/918/918137.pdf",
+            "https://github.com/user-attachments/files/18381692/tika-918137.pdf",
             "tika-918137.pdf",
         ),
         (
@@ -765,16 +766,16 @@ def test_get_outline(url, name):
     reader.outline
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/935/935981.pdf",
+            "https://github.com/user-attachments/files/18381707/tika-935981.pdf",
             "tika-935981.pdf",
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/937/937334.pdf",
+            "https://github.com/user-attachments/files/18381709/tika-937334.pdf",
             "tika-937334.pdf",
         ),
     ],
@@ -785,27 +786,27 @@ def test_get_xfa(url, name):
     reader.xfa
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name", "strict"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/988/988698.pdf",
+            "https://github.com/user-attachments/files/18381765/tika-988698.pdf",
             "tika-988698.pdf",
             False,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/914/914133.pdf",
-            "tika-988698.pdf",
+            "https://github.com/user-attachments/files/18382162/914133.pdf",
+            "tika-914133.pdf",
             False,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/912/912552.pdf",
+            "https://github.com/user-attachments/files/18381685/tika-912552.pdf",
             "tika-912552.pdf",
             False,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/914/914102.pdf",
+            "https://github.com/user-attachments/files/18381687/tika-914102.pdf",
             "tika-914102.pdf",
             True,
         ),
@@ -818,27 +819,27 @@ def test_get_fonts(url, name, strict):
         page._get_fonts()
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("url", "name", "strict"),
     [
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/942/942303.pdf",
+            "https://github.com/user-attachments/files/18382060/tika-942303.pdf",
             "tika-942303.pdf",
             True,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/935/935981.pdf",
+            "https://github.com/user-attachments/files/18381707/tika-935981.pdf",
             "tika-935981.pdf",
             True,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/967/967399.pdf",
+            "https://github.com/user-attachments/files/18381738/tika-967399.pdf",
             "tika-967399.pdf",
             True,
         ),
         (
-            "https://corpora.tika.apache.org/base/docs/govdocs1/935/935981.pdf",
+            "https://github.com/user-attachments/files/18381707/tika-935981.pdf",
             "tika-935981.pdf",
             False,
         ),
@@ -876,7 +877,7 @@ def test_get_xmp(url, name, strict):
         xmp_info.custom_properties
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_tounicode_is_identity():
     url = "https://github.com/py-pdf/pypdf/files/9998335/FP_Thesis.pdf"
     name = "FP_Thesis.pdf"
@@ -885,7 +886,7 @@ def test_tounicode_is_identity():
     reader.pages[0].extract_text()
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_append_forms():
     # from #1538
     writer = PdfWriter()
@@ -910,7 +911,7 @@ def test_append_forms():
     ) + len(reader2.get_form_text_fields())
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_extra_test_iss1541():
     url = "https://github.com/py-pdf/pypdf/files/10418158/tst_iss1541.pdf"
     name = "tst_iss1541.pdf"
@@ -930,9 +931,7 @@ def test_extra_test_iss1541():
     stream = BytesIO()
     cs.write_to_stream(stream)
     stream.seek(0)
-    with pytest.raises(PdfReadError) as exc:
-        ContentStream(read_object(stream, None, None), None, None).operations
-    assert exc.value.args[0] == "Unexpected end of stream"
+    ContentStream(read_object(stream, None, None), None, None).operations
 
     b = BytesIO(data.getbuffer())
     reader = PdfReader(
@@ -943,7 +942,7 @@ def test_extra_test_iss1541():
     assert exc.value.args[0] == "Unexpected end of stream"
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_fields_returning_stream():
     """This problem was reported in #424"""
     url = "https://github.com/mstamy2/PyPDF2/files/1948267/Simple.form.pdf"
@@ -977,7 +976,7 @@ def test_replace_image(tmp_path):
     # extra tests for coverage
     with pytest.raises(TypeError) as exc:
         reader.pages[0].images[0].replace(img)
-    assert exc.value.args[0] == "Can not update an image not belonging to a PdfWriter"
+    assert exc.value.args[0] == "Cannot update an image not belonging to a PdfWriter."
     i = writer.pages[0].images[0]
     with pytest.raises(TypeError) as exc:
         i.replace(reader.pages[0].images[0])  # missing .image
@@ -985,10 +984,19 @@ def test_replace_image(tmp_path):
     i.indirect_reference = None  # to behave like an inline image
     with pytest.raises(TypeError) as exc:
         i.replace(reader.pages[0].images[0].image)
-    assert exc.value.args[0] == "Can not update an inline image"
+    assert exc.value.args[0] == "Cannot update an inline image."
+
+    import pypdf
+
+    try:
+        pypdf._page.pil_not_imported = True
+        with pytest.raises(ImportError) as exc:
+            i.replace(reader.pages[0].images[0].image)
+    finally:
+        pypdf._page.pil_not_imported = False
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_inline_images():
     """This problem was reported in #424"""
     url = "https://arxiv.org/pdf/2201.00151.pdf"
@@ -1012,16 +1020,21 @@ def test_inline_images():
 
     with pytest.raises(TypeError) as exc:
         reader.pages[0].images[0].replace(img_ref)
-    assert exc.value.args[0] == "Can not update an inline image"
+    assert exc.value.args[0] == "Cannot update an inline image."
 
     _a = {}
     for x, y in reader.pages[2].images[0:-2].items():
-        _a[x] = y
+        _a[x] = y  # noqa: PERF403  # Testing code and easier to read this way.
     with pytest.raises(KeyError) as exc:
         reader.pages[2]._get_image(("test",))
 
+    url = "https://github.com/py-pdf/pypdf/files/15233597/bug1065245.pdf"
+    name = "iss2598c.pdf"  # test data also used in test_images.py/test_inline_image_extraction()
+    reader = PdfReader(BytesIO(get_data_from_url(url, name=name)))
+    assert len(reader.pages[0].images) == 3
 
-@pytest.mark.enable_socket()
+
+@pytest.mark.enable_socket
 def test_iss():
     url = "https://github.com/py-pdf/pypdf/files/11801077/lv2018tconv.pdf"
     name = "lv2018tconv.pdf"
@@ -1031,7 +1044,7 @@ def test_iss():
         page.extract_text()
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_cr_with_cm_operation():
     """Issue #2138"""
     url = "https://github.com/py-pdf/pypdf/files/12483807/AEO.1172.pdf"
@@ -1045,7 +1058,7 @@ Division / Dept: 50 / 170
 Season: SUMMER-B 2023"""
         in reader.pages[0].extract_text()
     )
-    # currently threre is still a white space on last line missing
+    # currently there is still a white space on last line missing
     # so we can not do a full comparison.
 
 
@@ -1054,7 +1067,7 @@ def remove_trailing_whitespace(text: str) -> str:
     return "\n".join(line.rstrip() for line in text.splitlines())
 
 
-@pytest.mark.samples()
+@pytest.mark.samples
 @pytest.mark.parametrize(
     ("pdf_path", "expected_path"),
     [
@@ -1076,7 +1089,7 @@ def test_text_extraction_layout_mode(pdf_path, expected_path):
     assert remove_trailing_whitespace(actual) == remove_trailing_whitespace(expected)
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_layout_mode_space_vertically():
     reader = PdfReader(BytesIO(get_data_from_url(name="iss2138.pdf")))
     # remove automatically added final newline
@@ -1088,7 +1101,7 @@ def test_layout_mode_space_vertically():
     )
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 @pytest.mark.parametrize(
     ("rotation", "strip_rotated"), [(90, True), (180, False), (270, True)]
 )
@@ -1117,7 +1130,7 @@ def test_text_extraction_invalid_mode():
         reader.pages[0].extract_text(extraction_mode="foo")  # type: ignore
 
 
-@pytest.mark.enable_socket()
+@pytest.mark.enable_socket
 def test_get_page_showing_field():
     """
     Uses testfile from #2452 in order to get fields on multiple pages,
@@ -1183,7 +1196,7 @@ def test_get_page_showing_field():
         reader.get_pages_showing_field(None)
     with pytest.raises(ValueError) as exc:
         writer.get_pages_showing_field(None)
-    assert "field type is invalid" in exc.value.args[0]
+    assert "Field type is invalid" in exc.value.args[0]
 
     # Damage Field
     del reader.trailer["/Root"]["/AcroForm"]["/Fields"][1].get_object()["/FT"]
@@ -1194,7 +1207,7 @@ def test_get_page_showing_field():
         )
     with pytest.raises(ValueError) as exc:
         writer.get_pages_showing_field(writer._root_object["/AcroForm"]["/Fields"][1])
-    assert "field is not valid" in exc.value.args[0]
+    assert "Field is not valid" in exc.value.args[0]
 
     # missing Parent in field
     del reader.trailer["/Root"]["/AcroForm"]["/Fields"][99]["/Kids"][1].get_object()[
@@ -1272,3 +1285,21 @@ def test_get_page_showing_field():
             writer._root_object["/AcroForm"]["/Fields"][-1]
         )
     ] == []
+
+
+@pytest.mark.enable_socket
+def test_extract_empty_page():
+    """Cf #2533"""
+    url = "https://github.com/py-pdf/pypdf/files/14718318/test.pdf"
+    name = "iss2533.pdf"
+    reader = PdfReader(BytesIO(get_data_from_url(url, name)))
+    assert reader.pages[1].extract_text(extraction_mode="layout") == ""
+
+
+@pytest.mark.enable_socket
+def test_iss2815():
+    """Cf #2815"""
+    url = "https://github.com/user-attachments/files/16760725/crash-c1920c7a064649e1191d7879952ec252473fc7e6.pdf"
+    name = "iss2815.pdf"
+    reader = PdfReader(BytesIO(get_data_from_url(url, name)))
+    assert reader.pages[0].extract_text() == "test command with wrong number of args"

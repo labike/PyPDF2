@@ -1,13 +1,13 @@
 # Contributors
 
-pypdf had a lot of contributors since it started with pyPdf in 2005. We are
+pypdf had a lot of contributors since it started as pyPdf in 2005. We are
 a free software project without any company affiliation. We cannot pay
 contributors, but we do value their contributions. A lot of time, effort, and
-expertise went into this project. With this list, we recognize those awesome
+expertise went into this project. With this list, we recognize these awesome
 people 🤗
 
 The list is definitely not complete. You can find more contributors via the git
-history and [GitHubs 'Contributors' feature](https://github.com/py-pdf/pypdf/graphs/contributors).
+history and [GitHub's 'Contributors' feature](https://github.com/py-pdf/pypdf/graphs/contributors).
 
 ## Contributors to the pypdf (formerly pyPdf / PyPDF2) project
 
@@ -19,6 +19,7 @@ history and [GitHubs 'Contributors' feature](https://github.com/py-pdf/pypdf/gra
 * [ediamondscience](https://github.com/ediamondscience)
 * [Ermeson, Felipe](https://github.com/FelipeErmeson)
 * [Freitag, François](https://github.com/francoisfreitag)
+* [Gagnon, William G.](https://github.com/williamgagnon)
 * [Górny, Michał](https://github.com/mgorny)
 * [Grillo, Miguel](https://github.com/Ineffable22)
 * [Gutteridge, David H.](https://github.com/dhgutteridge)
@@ -35,6 +36,7 @@ history and [GitHubs 'Contributors' feature](https://github.com/py-pdf/pypdf/gra
 * [maxbeer99](https://github.com/maxbeer99)
 * [McNeil, Karen](https://github.com/karenlmcneil): Arabic Language Support
 * [Mérino, Antoine](https://github.com/Merinorus)
+* [Murphy, Kevin](https://github.com/kmurphy4)
 * [nalin-udhaar](https://github.com/nalin-udhaar)
 * [Paramonov, Alexey](https://github.com/alexey-v-paramonov)
 * [Paternault, Louis](https://framagit.org/spalax)
