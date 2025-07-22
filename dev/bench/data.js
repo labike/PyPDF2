@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753179095218,
+  "lastUpdate": 1753200705433,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -6403,6 +6403,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.003157119025175904",
             "extra": "mean: 751.7863480000017 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "Stefan",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0b642665b759499e060fbdb54a3e63004f5b20d6",
+          "message": "BUG: Fix XMP handling dropping indirect references (#3392)\n\nCloses #3391.\n\nAccording to table 29 of the PDF 2.0 specification, the Metadata stream\ninside the catalog dictionary should be an indirect reference. The old\ncode would inline the content stream into the catalog dictionary, making\nthe file unreadable in some applications like some versions of Adobe\nAcrobat.",
+          "timestamp": "2025-07-22T14:10:39+02:00",
+          "tree_id": "3712793d37e82a88bf52e0cbc9c4fb11a39146e0",
+          "url": "https://github.com/labike/PyPDF2/commit/0b642665b759499e060fbdb54a3e63004f5b20d6"
+        },
+        "date": 1753200704962,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.369344462410182,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01038934247179008",
+            "extra": "mean: 296.79363779999903 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 14.926062629311037,
+            "unit": "iter/sec",
+            "range": "stddev: 0.009121957099014895",
+            "extra": "mean: 66.99690499999988 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.2618787052940746,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01616346997789028",
+            "extra": "mean: 3.8185617226000033 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 16.05274917325437,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0031814083481327506",
+            "extra": "mean: 62.29462562500565 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.07528628594599156,
+            "unit": "iter/sec",
+            "range": "stddev: 1.4933875074796559",
+            "extra": "mean: 13.282631589999994 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.326833020208807,
+            "unit": "iter/sec",
+            "range": "stddev: 0.001462749162018461",
+            "extra": "mean: 753.6743394000155 msec\nrounds: 5"
           }
         ]
       }
