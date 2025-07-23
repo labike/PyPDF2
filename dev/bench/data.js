@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1753200705433,
+  "lastUpdate": 1753287102702,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -6469,6 +6469,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.001462749162018461",
             "extra": "mean: 753.6743394000155 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "35156490+cybercoded@users.noreply.github.com",
+            "name": "Tomiwa Kunle Oluwadare",
+            "username": "cybercoded"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "47a7f8fae02aa06585f8c8338dcab647e2547917",
+          "message": "DOC: Add note about scanned PDFs and OCR suggestion in extract_text.md (#3387)",
+          "timestamp": "2025-07-23T14:03:56+02:00",
+          "tree_id": "de31110a3461248371c5a4ee90d5bd35a9a6ab5f",
+          "url": "https://github.com/labike/PyPDF2/commit/47a7f8fae02aa06585f8c8338dcab647e2547917"
+        },
+        "date": 1753287102093,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.211546095025291,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01088302859548747",
+            "extra": "mean: 311.37650540000266 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 14.8545115851959,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0067945531099608825",
+            "extra": "mean: 67.31961493749861 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.2730193754273361,
+            "unit": "iter/sec",
+            "range": "stddev: 0.03177297262854271",
+            "extra": "mean: 3.6627437098 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 18.087573239337036,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00038957041935831446",
+            "extra": "mean: 55.28657641176484 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.0826019660855835,
+            "unit": "iter/sec",
+            "range": "stddev: 0.19587650140122886",
+            "extra": "mean: 12.106249371400008 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.3313310104285851,
+            "unit": "iter/sec",
+            "range": "stddev: 0.005312849689686338",
+            "extra": "mean: 751.1280005999993 msec\nrounds: 5"
           }
         ]
       }
