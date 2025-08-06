@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754410290167,
+  "lastUpdate": 1754475095860,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -6931,6 +6931,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.002275779763674809",
             "extra": "mean: 741.4726930000029 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "120829237+j-t-1@users.noreply.github.com",
+            "name": "j-t-1",
+            "username": "j-t-1"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "794504bb87f8fac0fb8d5830c9bcfb6530100431",
+          "message": "MAINT: Remove ignoring Ruff rule TD005 (#3422)\n\nTD005: Missing issue description after TODO.",
+          "timestamp": "2025-08-06T12:09:01+02:00",
+          "tree_id": "7517f1669b946f48bf282203194c4578f572a23a",
+          "url": "https://github.com/labike/PyPDF2/commit/794504bb87f8fac0fb8d5830c9bcfb6530100431"
+        },
+        "date": 1754475095116,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.3991902075177265,
+            "unit": "iter/sec",
+            "range": "stddev: 0.010877491821313704",
+            "extra": "mean: 294.18771499999536 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.085456949800905,
+            "unit": "iter/sec",
+            "range": "stddev: 0.008884871220151894",
+            "extra": "mean: 66.28900956249772 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.26945251894320515,
+            "unit": "iter/sec",
+            "range": "stddev: 0.014763663464725038",
+            "extra": "mean: 3.7112289910000014 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.975083915674333,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000502640641137386",
+            "extra": "mean: 55.63256364706019 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08217247744300171,
+            "unit": "iter/sec",
+            "range": "stddev: 0.27131528091096735",
+            "extra": "mean: 12.1695247742 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.3327374955416127,
+            "unit": "iter/sec",
+            "range": "stddev: 0.007000137082235569",
+            "extra": "mean: 750.3353085999947 msec\nrounds: 5"
           }
         ]
       }
