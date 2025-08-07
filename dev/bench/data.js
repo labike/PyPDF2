@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754475095860,
+  "lastUpdate": 1754583113549,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -6997,6 +6997,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.007000137082235569",
             "extra": "mean: 750.3353085999947 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "Stefan",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0b58493ac3b725a342da3a53d5634b197e698ab2",
+          "message": "MAINT: Cleanup deprecations (#3424)\n\nThe encryption key cannot be removed yet as this requires changing the\nmethod signature everywhere, but we have deprecations for two different\npypdf versions.",
+          "timestamp": "2025-08-07T15:56:35+02:00",
+          "tree_id": "7ea83cbe2bc2222721cbc83409034b20f5c591e9",
+          "url": "https://github.com/labike/PyPDF2/commit/0b58493ac3b725a342da3a53d5634b197e698ab2"
+        },
+        "date": 1754583113087,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.360480875027411,
+            "unit": "iter/sec",
+            "range": "stddev: 0.011839934799860289",
+            "extra": "mean: 297.57645920000755 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 14.932815680310188,
+            "unit": "iter/sec",
+            "range": "stddev: 0.009135906643702568",
+            "extra": "mean: 66.96660706249524 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.2603142607719074,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01591255809857824",
+            "extra": "mean: 3.8415106304000006 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.715093989351235,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007024004416667823",
+            "extra": "mean: 56.44903722221923 msec\nrounds: 18"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08281987564597794,
+            "unit": "iter/sec",
+            "range": "stddev: 0.07621486378414088",
+            "extra": "mean: 12.074396299199998 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.3446969892816494,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0020992893979340436",
+            "extra": "mean: 743.6619610000093 msec\nrounds: 5"
           }
         ]
       }
