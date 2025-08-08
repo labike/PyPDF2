@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754583113549,
+  "lastUpdate": 1754647894913,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -7063,6 +7063,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0020992893979340436",
             "extra": "mean: 743.6619610000093 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "120829237+j-t-1@users.noreply.github.com",
+            "name": "j-t-1",
+            "username": "j-t-1"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b622a2f51dd788f052245d48ad2f9a76cefca919",
+          "message": "ENH: Move BlackIs1 functionality to tiff_header (#3421)\n\nAlso correct types in CCITTParameters.\n\n---------\n\nCo-authored-by: Stefan <96178532+stefan6419846@users.noreply.github.com>",
+          "timestamp": "2025-08-08T10:23:19+02:00",
+          "tree_id": "8330344b6ecc1b2f6e96c1a9276f8fe3f689d8b1",
+          "url": "https://github.com/labike/PyPDF2/commit/b622a2f51dd788f052245d48ad2f9a76cefca919"
+        },
+        "date": 1754647894183,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.5136884528442667,
+            "unit": "iter/sec",
+            "range": "stddev: 0.008055433441978612",
+            "extra": "mean: 284.60121420000064 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.548902834382488,
+            "unit": "iter/sec",
+            "range": "stddev: 0.006655715598613565",
+            "extra": "mean: 64.31321943749957 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.27439572595593226,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01142284568679594",
+            "extra": "mean: 3.6443716334000014 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.978538066247374,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00044500211795780705",
+            "extra": "mean: 55.62187516666799 msec\nrounds: 18"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08219449046395613,
+            "unit": "iter/sec",
+            "range": "stddev: 0.09408994338607803",
+            "extra": "mean: 12.16626557759999 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.3507642066420817,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004813308022677874",
+            "extra": "mean: 740.3216601999986 msec\nrounds: 5"
           }
         ]
       }
