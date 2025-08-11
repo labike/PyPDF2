@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1754907091973,
+  "lastUpdate": 1754928760796,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -7195,6 +7195,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.004789193859675028",
             "extra": "mean: 715.9712290000016 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "stefan6419846",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "stefan6419846",
+            "username": "stefan6419846"
+          },
+          "distinct": true,
+          "id": "0dd57738bbdcdb63f0fb43d8a6b3d222b6946595",
+          "message": "REL: 6.0.0\n\n## What's new\n\n### Security (SEC)\n- Limit decompressed size for FlateDecode filter (#3430) by @stefan6419846\n\n### Deprecations (DEP)\n- Drop Python 3.8 support (#3412) by @stefan6419846\n\n### New Features (ENH)\n- Move BlackIs1 functionality to tiff_header (#3421) by @j-t-1\n\n### Robustness (ROB)\n- Skip Go-To actions without a destination (#3420) by @badGarnet\n\n### Developer Experience (DEV)\n- Update code style related libraries (#3414) by @stefan6419846\n- Update mypy to 1.17.0 (#3413) by @stefan6419846\n- Stop testing on Python 3.8 and start testing on Python 3.14 (#3411) by @stefan6419846\n\n### Maintenance (MAINT)\n- Cleanup deprecations (#3424) by @stefan6419846\n\n[Full Changelog](https://github.com/py-pdf/pypdf/compare/5.9.0...6.0.0)",
+          "timestamp": "2025-08-11T16:19:47+02:00",
+          "tree_id": "3788d1f41740cb4f5cadddfd27eb8c2ad337e33f",
+          "url": "https://github.com/labike/PyPDF2/commit/0dd57738bbdcdb63f0fb43d8a6b3d222b6946595"
+        },
+        "date": 1754928760341,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.483533060540081,
+            "unit": "iter/sec",
+            "range": "stddev: 0.007692640458882703",
+            "extra": "mean: 287.0648800000083 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.425189372614334,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0058172015261833375",
+            "extra": "mean: 64.82902581250549 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.27675271632842263,
+            "unit": "iter/sec",
+            "range": "stddev: 0.02045791289936293",
+            "extra": "mean: 3.613334001800001 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 18.257785723413637,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007090421109626154",
+            "extra": "mean: 54.77115435294041 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.07984839754683706,
+            "unit": "iter/sec",
+            "range": "stddev: 0.16168754601023058",
+            "extra": "mean: 12.523732857799995 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.5001597779674698,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004652471793731308",
+            "extra": "mean: 666.5956618000223 msec\nrounds: 5"
           }
         ]
       }
