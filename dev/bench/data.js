@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1758795098345,
+  "lastUpdate": 1759075897977,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -8185,6 +8185,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0014887250631451417",
             "extra": "mean: 662.568493599997 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "stefan6419846",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "stefan6419846",
+            "username": "stefan6419846"
+          },
+          "distinct": true,
+          "id": "9cb878c3f90a665a59e442d3c09da7b7b2a88af6",
+          "message": "REL: 6.1.1\n\n## What's new\n\n### Bug Fixes (BUG)\n- Insert new embedded files in a sorted manner (#3477) by @stefan6419846\n- Fix name tree handling for embedded files with Kids-based inputs (#3475) by @stefan6419846\n- Make embedding files not break PDF/A-3 compliance (#3472) by @stefan6419846\n\n### Documentation (DOC)\n- Document AFRelationship handling for PDF/A and provide constants (#3478) by @stefan6419846\n\n[Full Changelog](https://github.com/py-pdf/pypdf/compare/6.1.0...6.1.1)",
+          "timestamp": "2025-09-28T15:25:29+02:00",
+          "tree_id": "e53bffa309eb7391a0f944b50ccdb6e8d253e821",
+          "url": "https://github.com/labike/PyPDF2/commit/9cb878c3f90a665a59e442d3c09da7b7b2a88af6"
+        },
+        "date": 1759075896902,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.4679365149692862,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01094782225167147",
+            "extra": "mean: 288.35591299999805 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.350770743297293,
+            "unit": "iter/sec",
+            "range": "stddev: 0.007004205834921732",
+            "extra": "mean: 65.14330887500464 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.27538652496570465,
+            "unit": "iter/sec",
+            "range": "stddev: 0.018630640050434598",
+            "extra": "mean: 3.631259736200002 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.573548136562454,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0012614651995230214",
+            "extra": "mean: 56.90370505882423 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08211151190134197,
+            "unit": "iter/sec",
+            "range": "stddev: 0.06526407719194993",
+            "extra": "mean: 12.178560312000013 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.5440419607558502,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0009136504660102472",
+            "extra": "mean: 647.6507928000046 msec\nrounds: 5"
           }
         ]
       }
