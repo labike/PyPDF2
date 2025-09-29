@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1759075897977,
+  "lastUpdate": 1759162290170,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -8251,6 +8251,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0009136504660102472",
             "extra": "mean: 647.6507928000046 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "Stefan",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "2b2eca26ac97e035044d5aa9b25c22a61594c1c8",
+          "message": "ROB: Improve handling for malformed cross-reference tables (#3483)\n\nCloses #3482.\n\nAdditionally, I had to replace a dead test file link.",
+          "timestamp": "2025-09-29T14:01:46+02:00",
+          "tree_id": "8ac36815301d8621e1122899f42853aa8ff7c70a",
+          "url": "https://github.com/labike/PyPDF2/commit/2b2eca26ac97e035044d5aa9b25c22a61594c1c8"
+        },
+        "date": 1759162289658,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.5049181235423776,
+            "unit": "iter/sec",
+            "range": "stddev: 0.007935600532301003",
+            "extra": "mean: 285.3133696000043 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.473996207111952,
+            "unit": "iter/sec",
+            "range": "stddev: 0.007398951216668073",
+            "extra": "mean: 64.62454731250311 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.2774968871191458,
+            "unit": "iter/sec",
+            "range": "stddev: 0.016886285999767093",
+            "extra": "mean: 3.603644027799999 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.2383965257699,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0014448774427312492",
+            "extra": "mean: 58.010035823522635 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.0824945088475985,
+            "unit": "iter/sec",
+            "range": "stddev: 0.15029806123885023",
+            "extra": "mean: 12.122018955800002 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.5363423749159502,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004939564882955077",
+            "extra": "mean: 650.8965815999886 msec\nrounds: 5"
           }
         ]
       }
