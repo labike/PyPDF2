@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1759162290170,
+  "lastUpdate": 1759767106433,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -8317,6 +8317,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.004939564882955077",
             "extra": "mean: 650.8965815999886 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "Stefan",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "9fad9ff0f2ded6c0792953547f968bb872161737",
+          "message": "DEV: Use Mapping instead of dict in type hint of update_page_form_field_values (#3490)\n\nHaving the parameter typed as a dictionary does not allow for stricter\ntype hints on the user side, like `dict[str, str]`, as a dictionary is\nconsidered mutable. Typing our method as `Mapping` indicates that we\ndo not change the corresponding values inside it and does allow for\nstricter typing in user code.\n\nCloses #3453.",
+          "timestamp": "2025-10-06T14:07:39+02:00",
+          "tree_id": "ec5981f48304a2277c93da68d4559f6bf712942e",
+          "url": "https://github.com/labike/PyPDF2/commit/9fad9ff0f2ded6c0792953547f968bb872161737"
+        },
+        "date": 1759767105793,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.409780405436381,
+            "unit": "iter/sec",
+            "range": "stddev: 0.009785180422980468",
+            "extra": "mean: 293.27401800000104 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.07440598189125,
+            "unit": "iter/sec",
+            "range": "stddev: 0.008697939696394772",
+            "extra": "mean: 66.33760568750047 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.26784460755254075,
+            "unit": "iter/sec",
+            "range": "stddev: 0.036843563281282146",
+            "extra": "mean: 3.733508055799999 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.467698249466416,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0006499965415764542",
+            "extra": "mean: 57.24852729411827 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08206447777959662,
+            "unit": "iter/sec",
+            "range": "stddev: 0.18486830964571865",
+            "extra": "mean: 12.185540285599993 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.5479206069514597,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0037355973356999863",
+            "extra": "mean: 646.0279651999997 msec\nrounds: 5"
           }
         ]
       }
