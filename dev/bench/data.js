@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1760263894615,
+  "lastUpdate": 1760631099913,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -8449,6 +8449,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.0031329032200658894",
             "extra": "mean: 663.2080598000073 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "38529115+Likend@users.noreply.github.com",
+            "name": "Likend",
+            "username": "Likend"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "623a700342c0a7506fc88b5d112d25f28593787b",
+          "message": "BUG: Fix handling of zero-length StreamObject (#3485)\n\nCloses #3052.\n\n---------\n\nCo-authored-by: stefan6419846 <96178532+stefan6419846@users.noreply.github.com>",
+          "timestamp": "2025-10-16T16:06:59+02:00",
+          "tree_id": "c3b84d96db932e9284ed65c5b5069a8fa65d445d",
+          "url": "https://github.com/labike/PyPDF2/commit/623a700342c0a7506fc88b5d112d25f28593787b"
+        },
+        "date": 1760631098605,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.559801458908411,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01017288837926076",
+            "extra": "mean: 280.91454300000294 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.406451191883564,
+            "unit": "iter/sec",
+            "range": "stddev: 0.008569455604908021",
+            "extra": "mean: 64.90787447058675 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.27243153582272606,
+            "unit": "iter/sec",
+            "range": "stddev: 0.029584242140869993",
+            "extra": "mean: 3.670647001200001 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.603594312655563,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0005587741221935816",
+            "extra": "mean: 56.80658064706028 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08195355129115979,
+            "unit": "iter/sec",
+            "range": "stddev: 0.1079517697924286",
+            "extra": "mean: 12.202033764799996 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.5049601498486724,
+            "unit": "iter/sec",
+            "range": "stddev: 0.005185695577243768",
+            "extra": "mean: 664.4694213999969 msec\nrounds: 5"
           }
         ]
       }
