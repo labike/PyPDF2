@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1760631099913,
+  "lastUpdate": 1760890325168,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -8515,6 +8515,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.005185695577243768",
             "extra": "mean: 664.4694213999969 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "stefan6419846",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "stefan6419846",
+            "username": "stefan6419846"
+          },
+          "distinct": true,
+          "id": "0859b3579f5a0bd7a478c5405fb876a989e3b386",
+          "message": "REL: 6.1.2\n\n## What's new\n\n### Bug Fixes (BUG)\n- Fix handling of zero-length StreamObject (#3485) by @Likend\n\n### Robustness (ROB)\n- Deal with wrong size for incremental PDF files (#3495) by @stefan6419846\n- Improve handling for malformed cross-reference tables (#3483) by @stefan6419846\n\n### Developer Experience (DEV)\n- Use released Python 3.14 by @stefan6419846\n- Use Mapping instead of dict in type hint of update_page_form_field_values (#3490) by @stefan6419846\n\n[Full Changelog](https://github.com/py-pdf/pypdf/compare/6.1.1...6.1.2)",
+          "timestamp": "2025-10-19T15:44:34+02:00",
+          "tree_id": "631a8d6663e4a79c3302ec3e85cc09e6ba968190",
+          "url": "https://github.com/labike/PyPDF2/commit/0859b3579f5a0bd7a478c5405fb876a989e3b386"
+        },
+        "date": 1760890324691,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.5356582262368073,
+            "unit": "iter/sec",
+            "range": "stddev: 0.010004829741567856",
+            "extra": "mean: 282.83276720000003 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.539885660976958,
+            "unit": "iter/sec",
+            "range": "stddev: 0.007726827901778046",
+            "extra": "mean: 64.35053782352811 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.2776802350207267,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004965868298156282",
+            "extra": "mean: 3.6012645982000038 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 18.003479424447807,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0008399139927056577",
+            "extra": "mean: 55.544818666665684 msec\nrounds: 18"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08149009693855865,
+            "unit": "iter/sec",
+            "range": "stddev: 0.12563880388854518",
+            "extra": "mean: 12.271429751199992 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.513126823533664,
+            "unit": "iter/sec",
+            "range": "stddev: 0.001987939185684155",
+            "extra": "mean: 660.8831357999861 msec\nrounds: 5"
           }
         ]
       }
