@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1761127905809,
+  "lastUpdate": 1761149520220,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -8713,6 +8713,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.004633128283061643",
             "extra": "mean: 647.0563650000145 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "Stefan",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f2864d6dd9bac7cecd3f4f54308b25ebbfa178f8",
+          "message": "SEC: Avoid infinite loop when reading broken DCT-based inline images (#3501)",
+          "timestamp": "2025-10-22T17:52:40+02:00",
+          "tree_id": "becd4e9c356153c973d20b82fc5cdae42c3ca594",
+          "url": "https://github.com/labike/PyPDF2/commit/f2864d6dd9bac7cecd3f4f54308b25ebbfa178f8"
+        },
+        "date": 1761149519696,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.5688921903394943,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00818341177739223",
+            "extra": "mean: 280.1989935999927 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.582832582901325,
+            "unit": "iter/sec",
+            "range": "stddev: 0.00785477018526216",
+            "extra": "mean: 64.17318511765804 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.282109902706712,
+            "unit": "iter/sec",
+            "range": "stddev: 0.02498719905818109",
+            "extra": "mean: 3.5447178223999574 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 18.118272021261582,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0011803235303869005",
+            "extra": "mean: 55.1929013333342 msec\nrounds: 18"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08189888215188738,
+            "unit": "iter/sec",
+            "range": "stddev: 0.09446368465556801",
+            "extra": "mean: 12.210178866000001 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.5194228291268765,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004421997437694062",
+            "extra": "mean: 658.1446459999825 msec\nrounds: 5"
           }
         ]
       }
