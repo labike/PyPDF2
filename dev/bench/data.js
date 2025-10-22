@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1761149520220,
+  "lastUpdate": 1761171107233,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -8779,6 +8779,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.004421997437694062",
             "extra": "mean: 658.1446459999825 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "stefan6419846",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "stefan6419846",
+            "username": "stefan6419846"
+          },
+          "distinct": true,
+          "id": "4a613f3fbe7af8ef65bbae740ceabe35310db4ee",
+          "message": "REL: 6.1.3\n\n## What's new\n\n### Security (SEC)\n- Allow limiting size of LZWDecode streams (#3502) by @stefan6419846\n- Avoid infinite loop when reading broken DCT-based inline images (#3501) by @stefan6419846\n\n### Bug Fixes (BUG)\n- PageObject.scale() scales media box incorrectly (#3489) by @Nid01\n\n### Robustness (ROB)\n- Fail with explicit exception when image mode is an empty array (#3500) by @stefan6419846\n\n[Full Changelog](https://github.com/py-pdf/pypdf/compare/6.1.2...6.1.3)",
+          "timestamp": "2025-10-22T18:10:49+02:00",
+          "tree_id": "0b370b02296c890934d2dbdf87da77eddf188772",
+          "url": "https://github.com/labike/PyPDF2/commit/4a613f3fbe7af8ef65bbae740ceabe35310db4ee"
+        },
+        "date": 1761171106033,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.456672871406042,
+            "unit": "iter/sec",
+            "range": "stddev: 0.009088271046714759",
+            "extra": "mean: 289.2955269999959 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.276641740657901,
+            "unit": "iter/sec",
+            "range": "stddev: 0.007593196394829467",
+            "extra": "mean: 65.45941293750168 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.26984141336863304,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01637590050436624",
+            "extra": "mean: 3.7058803817999943 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.325892836687085,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0013014754635170633",
+            "extra": "mean: 57.717083294116215 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08247775117196277,
+            "unit": "iter/sec",
+            "range": "stddev: 0.09900560512798481",
+            "extra": "mean: 12.124481885 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.5357485172635268,
+            "unit": "iter/sec",
+            "range": "stddev: 0.006134462328941304",
+            "extra": "mean: 651.1482763999993 msec\nrounds: 5"
           }
         ]
       }
