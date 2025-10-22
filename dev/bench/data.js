@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1760955103470,
+  "lastUpdate": 1761127905809,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -8647,6 +8647,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.004619908178549756",
             "extra": "mean: 645.8641272000023 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "96178532+stefan6419846@users.noreply.github.com",
+            "name": "Stefan",
+            "username": "stefan6419846"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b751ca2d3080dc24fa50393a0af5129643b3b6ce",
+          "message": "ROB: Fail with explicit exception when image mode is an empty array (#3500)\n\nCloses #3499.",
+          "timestamp": "2025-10-22T11:42:54+02:00",
+          "tree_id": "a0dc877b987f37e510c5d6122b9e3a7d8d6a8c18",
+          "url": "https://github.com/labike/PyPDF2/commit/b751ca2d3080dc24fa50393a0af5129643b3b6ce"
+        },
+        "date": 1761127905079,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.3702419062105666,
+            "unit": "iter/sec",
+            "range": "stddev: 0.010836946433430123",
+            "extra": "mean: 296.71460619999834 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 14.71048186632554,
+            "unit": "iter/sec",
+            "range": "stddev: 0.008998307737962626",
+            "extra": "mean: 67.97873850000435 msec\nrounds: 16"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.2666963976112542,
+            "unit": "iter/sec",
+            "range": "stddev: 0.02545077003320821",
+            "extra": "mean: 3.7495819551999885 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 17.4226488962878,
+            "unit": "iter/sec",
+            "range": "stddev: 0.000544518506169772",
+            "extra": "mean: 57.396553529415804 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.08276019469906323,
+            "unit": "iter/sec",
+            "range": "stddev: 0.020425778982643965",
+            "extra": "mean: 12.083103521399995 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.5454604175016153,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004633128283061643",
+            "extra": "mean: 647.0563650000145 msec\nrounds: 5"
           }
         ]
       }
