@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1763655104936,
+  "lastUpdate": 1763719911530,
   "repoUrl": "https://github.com/labike/PyPDF2",
   "entries": {
     "Python Benchmark with pytest-benchmark": [
@@ -9703,6 +9703,72 @@ window.BENCHMARK_DATA = {
             "unit": "iter/sec",
             "range": "stddev: 0.042853802224527726",
             "extra": "mean: 690.4564456000003 msec\nrounds: 5"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "mbierma@users.noreply.github.com",
+            "name": "mbierma",
+            "username": "mbierma"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "82faf984c0345d89ea757712665a950e28115eae",
+          "message": "ROB: Silently ignore Adobe Ascii85 whitespace for suffix detection (#3528)\n\nBased on the PDF standards \"the ASCII85Decode filter shall ignore all white-space characters\".\n\n---------\n\nCo-authored-by: mbierma <3448579-mbierma@users.noreply.gitlab.com>",
+          "timestamp": "2025-11-21T10:49:49+01:00",
+          "tree_id": "51458036e0456cfb8fcbb9bd2df42ecf490e63ba",
+          "url": "https://github.com/labike/PyPDF2/commit/82faf984c0345d89ea757712665a950e28115eae"
+        },
+        "date": 1763719911062,
+        "tool": "pytest",
+        "benches": [
+          {
+            "name": "tests/bench.py::test_page_operations",
+            "value": 3.805179468740128,
+            "unit": "iter/sec",
+            "range": "stddev: 0.005580774663734378",
+            "extra": "mean: 262.7996940000031 msec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_merge",
+            "value": 15.891623925965689,
+            "unit": "iter/sec",
+            "range": "stddev: 0.002541728735946493",
+            "extra": "mean: 62.926231117644114 msec\nrounds: 17"
+          },
+          {
+            "name": "tests/bench.py::test_text_extraction",
+            "value": 0.2818118320524278,
+            "unit": "iter/sec",
+            "range": "stddev: 0.01629358362342175",
+            "extra": "mean: 3.5484670488000005 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_read_string_from_stream_performance",
+            "value": 18.24437549165228,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0007903837721558193",
+            "extra": "mean: 54.81141299999829 msec\nrounds: 18"
+          },
+          {
+            "name": "tests/bench.py::test_image_new_property_performance",
+            "value": 0.09160273274163899,
+            "unit": "iter/sec",
+            "range": "stddev: 0.0147857028484409",
+            "extra": "mean: 10.916704885000001 sec\nrounds: 5"
+          },
+          {
+            "name": "tests/bench.py::test_large_compressed_image_performance",
+            "value": 1.4908155443045668,
+            "unit": "iter/sec",
+            "range": "stddev: 0.004360633165449203",
+            "extra": "mean: 670.7737947999988 msec\nrounds: 5"
           }
         ]
       }
